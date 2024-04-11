@@ -37,46 +37,54 @@ const InstaAccountChk = () => {
   return (
     <>
       <div className="insta-page">
+        <h1 id="insta-head">Fake Instagram Profile Prediction</h1>
         <form>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="pos"  placeholder="Enter number of Post" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="flw" placeholder="Enter number of Follwer" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number"name="flg" placeholder="Enter number of Following" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="pic" placeholder="Picture availability (0 if no profile pic, or 1 if has" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="lin" placeholder="Link availability (0 if no external URL, or 1 if has" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="erl" placeholder="Engagement rate(Like)" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="erc" placeholder="Engagement rate (Comm.)" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="pr" placeholder="Promotional keywords" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="fo" placeholder="Followers keywords" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="cs" placeholder="Cosine similarity (Average cosine similarity of between all pair of two posts a user has)" />
           </div>
           <div>
-            <input type="text" placeholder="" />
+            <input type="number" name="pi" placeholder=" Post interval (Average interval between posts (in hours))" />
           </div>
-        </form>
-        <div>
+          <br />
+          <div>
+           
           <button className="btn" onClick={chkSentiment}>
             {animation ? <Spinner /> : "Check Sentiment"}
           </button>
         </div>
+        </form>
+        {/* <div>
+          <button className="btn" onClick={chkSentiment}>
+            {animation ? <Spinner /> : "Check Sentiment"}
+          </button>
+        </div> */}
         <div>Result: {respose}</div>
       </div>
     </>

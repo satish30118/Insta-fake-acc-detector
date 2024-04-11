@@ -1,24 +1,46 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Spinner from "../Animation/Spinner";
+const bg =
+  "https://img.freepik.com/premium-photo/instagram-icon-screen-smartphone-mobile-3d-render_41204-14339.jpg";
 
 const InstaAccountChk = () => {
-  const [msg, setMsg] = useState("");
   const [animation, setAnimation] = useState(false);
   const [respose, setResponse] = useState();
+  const [data, setData] = useState({});
+  const [error, setError] = useState({ lin: "", pic: "" });
 
-  const chkSentiment = async (e) => {
+  const handleData = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setData({ ...data, [name]: value });
+  };
+
+  const chkAccount = async (e) => {
     e.preventDefault();
     try {
-      if (!msg) {
-        alert("Write something!");
+      const { pos, flw, flg, pic, lin, erl, erc, pr, fo, cs, pi } = data;
+      if (
+        !pos ||
+        !flw ||
+        !flg ||
+        !pic ||
+        !lin ||
+        !erl ||
+        !erc ||
+        !pr ||
+        !fo ||
+        !cs ||
+        !pi
+      ) {
+        alert("Fill data!");
         return;
       }
-
       setAnimation(true);
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/predict/predict-insta-account`,
-        { msg }
+        { pos, flw, flg, pic, lin, erl, erc, pr, fo, cs, pi }
       );
       setAnimation(false);
 
@@ -37,55 +59,116 @@ const InstaAccountChk = () => {
   return (
     <>
       <div className="insta-page">
+        <img src={bg} alt="" className="insta-page-bg" />
+        {/* <div style={{ color: "red", fontWeight: "660" }}>
+          {error ? error.pic : ""}
+        </div> */}
         <h1 id="insta-head">Fake Instagram Profile Prediction</h1>
         <form>
-          <div>
-            <input type="number" name="pos"  placeholder="Enter number of Post" />
+          <div className="form-data">
+            <div>
+              <input
+                type="number"
+                name="pos"
+                placeholder="Enter number of Post"
+                onChange={handleData}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="flw"
+                onChange={handleData}
+                placeholder="Enter number of Follwer"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="flg"
+                onChange={handleData}
+                placeholder="Enter number of Following"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="pic"
+                onChange={handleData}
+                placeholder="Picture availability (0 if no profile pic, or 1 if has"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="lin"
+                onChange={handleData}
+                placeholder="Link availability (0 if no external URL, or 1 if has"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="erl"
+                onChange={handleData}
+                placeholder="Engagement rate(Like)"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="erc"
+                onChange={handleData}
+                placeholder="Engagement rate (Comments)"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="pr"
+                placeholder="Promotional keywords"
+                onChange={handleData}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="fo"
+                placeholder="Followers keywords"
+                onChange={handleData}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="cs"
+                onChange={handleData}
+                placeholder="Cosine similarity (Average cosine similarity of between all pair of two posts a user has)"
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="pi"
+                onChange={handleData}
+                placeholder=" Post interval (Average interval between posts (in hours))"
+              />
+            </div>
           </div>
-          <div>
-            <input type="number" name="flw" placeholder="Enter number of Follwer" />
+          <div style={{ textAlign: "center" }}>
+            <button className="btn" onClick={chkAccount}>
+              {animation ? <Spinner /> : "Check Sentiment"}
+            </button>
           </div>
-          <div>
-            <input type="number"name="flg" placeholder="Enter number of Following" />
+          <div className="result">
+            
+            {respose ? respose == 1 ? (
+              <img src="https://static.vecteezy.com/system/resources/previews/019/582/462/non_2x/hand-holding-magnifying-glass-with-fake-inscription-free-png.png" />
+            ) : (
+              <img src="https://cdn-icons-png.flaticon.com/512/5229/5229573.png" />
+            ) : ""}
           </div>
-          <div>
-            <input type="number" name="pic" placeholder="Picture availability (0 if no profile pic, or 1 if has" />
-          </div>
-          <div>
-            <input type="number" name="lin" placeholder="Link availability (0 if no external URL, or 1 if has" />
-          </div>
-          <div>
-            <input type="number" name="erl" placeholder="Engagement rate(Like)" />
-          </div>
-          <div>
-            <input type="number" name="erc" placeholder="Engagement rate (Comm.)" />
-          </div>
-          <div>
-            <input type="number" name="pr" placeholder="Promotional keywords" />
-          </div>
-          <div>
-            <input type="number" name="fo" placeholder="Followers keywords" />
-          </div>
-          <div>
-            <input type="number" name="cs" placeholder="Cosine similarity (Average cosine similarity of between all pair of two posts a user has)" />
-          </div>
-          <div>
-            <input type="number" name="pi" placeholder=" Post interval (Average interval between posts (in hours))" />
-          </div>
-          <br />
-          <div>
-           
-          <button className="btn" onClick={chkSentiment}>
-            {animation ? <Spinner /> : "Check Sentiment"}
-          </button>
-        </div>
         </form>
-        {/* <div>
-          <button className="btn" onClick={chkSentiment}>
-            {animation ? <Spinner /> : "Check Sentiment"}
-          </button>
-        </div> */}
-        <div>Result: {respose}</div>
       </div>
     </>
   );

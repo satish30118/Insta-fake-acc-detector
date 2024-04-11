@@ -1,12 +1,12 @@
 import React from "react";
-import SignUp from "./SignUp";
 import "../App.css"
+import SignIn from "./SignIn";
 
 const Home = () => {
   return (
     <>
       <div className="home-page" >
-        <SignUp />
+        <SignIn />
       </div>
     </>
   );

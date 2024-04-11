@@ -31,7 +31,7 @@ data
 standard_scaler = pickle.load(open('./ml/standar_scaler.pkl', 'rb'))
 
 std=standard_scaler.transform(data)
-print(std)
+# print(std)
 
 pickled_model = pickle.load(open('./ml/fake.pkl', 'rb'))
 result=pickled_model.predict(std)

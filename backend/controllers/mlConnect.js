@@ -20,6 +20,7 @@ const InstaFakeAcc = async (req, res) => {
 
     childPython.on("close", (code) => {
       console.log(`child process exited with code: ${code}`);
+      console.log(sendData)
       res.status(200).json({ prediction: sendData });
     });
   } catch (error) {

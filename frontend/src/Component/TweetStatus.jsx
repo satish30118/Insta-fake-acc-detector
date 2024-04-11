@@ -6,10 +6,12 @@ const TweetStatus = () => {
   const [msg, setMsg] = useState("");
   const [animation, setAnimation] = useState(false);
   const [respose, setResponse] = useState();
+  const [length, setLength] = useState("");
 
   const chkSentiment = async (e) => {
     e.preventDefault();
     try {
+      setResponse("");
       if (!msg) {
         alert("Write something!");
         return;
@@ -25,6 +27,8 @@ const TweetStatus = () => {
       if (res?.status == 200) {
         // alert(res.data.prediction);
         setResponse(res?.data?.prediction);
+        setLength(res?.data?.prediction.length - 2);
+        // console.log(length)
       } else {
         alert(res);
       }
@@ -39,15 +43,19 @@ const TweetStatus = () => {
       <div className="tweet-status">
         <form>
           <div>
-            <textarea onChange={(e) => setMsg(e.target.value)}></textarea>
+            <textarea onChange={(e) => setMsg(e.target.value)}>
+              Enter tweet here...
+            </textarea>
           </div>
           <div>
             <button className="btn" onClick={chkSentiment}>
-             {animation ? <Spinner/> : "Check Sentiment" } 
+              {animation ? <Spinner /> : "Check Sentiment"}
             </button>
           </div>
         </form>
-        <div>Result: {respose}</div>
+        <div style={{ fontWeight: "700", fontSize: "23px" }}>
+          {respose ? `${respose.substring(2, length)}` : " "}
+        </div>
       </div>
     </>
   );

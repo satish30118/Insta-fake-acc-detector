@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const connectDB = require("./connection/db");
 const authRoutes = require("./router/authRoute");
-// const mlConnect = require("./mlConnect");
+const mlRoutes = require("./router/chkRoute");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 //ROUTES
 
 app.use("/api/v1/auth", authRoutes);
-// app.post("/api/v1/predict", mlConnect);
+app.use("/api/v1/predict", mlRoutes);
 
 //REST API
 app.get("/", (req, res) => {

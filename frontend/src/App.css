@@ -1,0 +1,84 @@
+.prediction-page {
+    background-color: aqua;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.insta {
+    height: 400px;
+    width: 40%;
+    background: pink;
+}
+
+.twitter {
+    height: 400px;
+    width: 40%;
+    background-color: brown;
+}
+
+/* Tweet Page */
+.tweet-status {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.tweet-status form {
+    height: auto;
+    width: 70%;
+    margin: 0px auto;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: white;
+}
+
+.tweet-status textarea {
+    width: 90%;
+    height: 300px;
+    padding: 12px 30px;
+}
+
+.btn {
+    border: none;
+    background-color: blue;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 30px;
+    margin: 20px 0;
+}
+
+/* Insta Page */
+.insta-page{
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.insta-page form {
+    height: auto;
+    width: 70%;
+    margin: 0px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 60px 20px;
+    background-color: white;
+}
+.insta-page form input{
+    padding: 8px 14px;
+    width: 400px;
+    border: 3px solid lightgray;
+    outline: none;
+    font-size: 19px;
+    margin:8px 0;
+    border-radius: 6px;
+
+}

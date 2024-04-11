@@ -4,6 +4,8 @@ import Home from "./Component/Home";
 import SignUp from "./Component/SignUp";
 import PredictAccount from "./Component/PredictAccount";
 import SignIn from "./Component/SignIn";
+import TweetStatus from "./Component/TweetStatus";
+import InstaAccountChk from "./Component/InstaAccountChk";
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
         <Route exact path="/" Component={Home} />
         <Route exact path="/sign-in" Component={SignIn} />
         <Route exact path="/sign-up" Component={SignUp} />
-        <Route exact path="/predict-account" Component={PredictAccount} />
+        <Route exact path="/predict" Component={PredictAccount} />
+        <Route exact path="/predict/tweet-status" Component={TweetStatus} />
+        <Route exact path="/predict/insta-fake-account" Component={InstaAccountChk} />
       </Routes>
     </BrowserRouter>
   );

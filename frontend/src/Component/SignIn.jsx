@@ -1,10 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Fill all data!!");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/login`,
+        { email, password }
+      );
+
+      if (res?.data?.success) {
+        alert(res.data.message);
+        //Forward to dashboard
+        navigate(`/predict`);
+        return;
+      } else {
+        alert(res.data.message);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Something went wrong, please try again");
+    }
+  };
   return (
     <div className="signin-form">
-      <section className="vh-100" style={{ backgroundColor: "rgb(118, 207, 207)" }}>
+      <section
+        className="vh-100"
+        style={{ backgroundColor: "rgb(118, 207, 207)" }}
+      >
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -18,81 +54,68 @@ const SignIn = () => {
                             Sign In
                           </p>
 
-                          <form className="mx-1 mx-md-4">
 
+                      <form className="mx-1 mx-md-4">
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                          <div
+                            data-mdb-input-init
+                            className="form-outline flex-fill mb-0"
+                          >
+                            <input
+                              type="email"
+                              placeholder="Enter email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                          </div>
+                        </div>
 
-                            <div className="d-flex flex-row align-items-center mb-4">
-                              <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                              <div
-                                data-mdb-input-init
-                                className="form-outline flex-fill mb-0"
-                              >
-                                <input
-                                  type="email"
-                                  id="form3Example3c"
-                                  className="form-control"
-                                />
-                                <label className="form-label" for="form3Example3c">
-                                  Your Email
-                                </label>
-                              </div>
-                            </div>
+                        <div className="d-flex flex-row align-items-center mb-4">
+                          <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
+                          <div
+                            data-mdb-input-init
+                            className="form-outline flex-fill mb-0"
+                          >
+                            <input
+                              type="password"
+                              placeholder="Enter password"
+                              onChange={(e) => setPassword(e.target.value)}
+                              value={password}
+                            />
+                          </div>
+                        </div>
 
-                            <div className="d-flex flex-row align-items-center mb-4">
-                              <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-                              <div
-                                data-mdb-input-init
-                                className="form-outline flex-fill mb-0"
-                              >
-                                <input
-                                  type="password"
-                                  id="form3Example4c"
-                                  className="form-control"
-                                />
-                                <label className="form-label" for="form3Example4c">
-                                  Password
-                                </label>
-                              </div>
-                            </div>
-
-
-                            <div className="form-check d-flex justify-content-center mb-5">
-                              <input
-                                className="form-check-input me-2"
-                                type="checkbox"
-                                value=""
-                                id="form2Example3c"
-                              />
-                              <label
-                                className="form-check-label"
-                                for="form2Example3"
-                              >
-                                Not have an account?
-                                <Link to="/sign-up">Register</Link>
-                              </label>
-                            </div>
-
-                            <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                              <button
-                                type="button"
-                                data-mdb-button-init
-                                data-mdb-ripple-init
-                                className="btn btn-primary btn-lg"
-                              >
-                                Login
-                              </button>
-                            </div>
-                          </form>
+                        <div className="form-check d-flex justify-content-center mb-5">
+                          <label
+                            className="form-check-label"
+                            for="form2Example3"
+                          >
+                            Not have an account?
+                            <Link to="/sign-up">Register</Link>
+                          </label>
                         </div>
                         <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                           <img
                             src={
                               "https://img.freepik.com/premium-vector/young-man-cartoon_18591-44529.jpg?size=626&ext=jpg"
 
+
                             }
                             className="img-fluid"
                             alt="Sample image"
                           />
+
+                        <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <button
+                            type="button"
+                            data-mdb-button-init
+                            data-mdb-ripple-init
+                            className="btn btn-primary btn-lg"
+                            onClick={handleLogin}
+                          >
+                            Login
+                          </button>
                         </div>
                       </div>
                     </div>

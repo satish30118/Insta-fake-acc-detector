@@ -1,0 +1,15 @@
+.home-page
+{
+    background-color: rgb(118, 207, 207);
+    /* background-image: url(https://techcult.com/wp-content/uploads/2022/06/How-to-Find-Out-Who-Made-a-Fake-Instagram-Account.png); */
+/* background-color: red; */
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+img{
+
+    width: 500px;
+    height: 300px;
+    padding-left: 50px;
+}

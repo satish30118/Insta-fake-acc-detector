@@ -1,15 +1,115 @@
-.home-page
-{
+.prediction-page {
     background-color: rgb(118, 207, 207);
-    /* background-image: url(https://techcult.com/wp-content/uploads/2022/06/How-to-Find-Out-Who-Made-a-Fake-Instagram-Account.png); */
-/* background-color: red; */
-background-repeat: no-repeat;
-background-size: cover;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.insta {
+    height: 400px;
+    width: 40%;
+    /* background: pink; */
+}
+
+.twitter {
+    height: 400px;
+    width: 40%;
+    /* background-color: brown; */
+}
+.twitter img
+{
+    width: 100%;
+    border-radius: 12px;
+}
+.insta img
+{
+    width: 90%;
+    border-radius: 12px;
+}
+
+/* Tweet Page */
+.tweet-status {
+    /* background-color: aqua; */
+    background-image: url(https://media.licdn.com/dms/image/D4D12AQEZ1zKwf1drNA/article-cover_image-shrink_720_1280/0/1693388207691?e=2147483647&v=beta&t=A9PHzzuyW2Pv2tozWYIy7jajzDOU8e749JNDxuhJF_c);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.tweet-status form {
+    height: auto;
+    width: 70%;
+    margin: 0px auto;
+    text-align: center;
+    padding: 60px 20px;
+    /* background-color: rgba(0,0,0,0.5); */
+}
+
+.tweet-status textarea {
+    width: 90%;
+    height: 300px;
+    padding: 12px 30px;
+    background-color: rgba(26, 37, 41, 0.5);
+    color: white;
+    font-size: 30px;
+    border: none;
+    outline: none;
+}
+
+.btn {
+    border: none;
+    background-color: blue;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 8px 30px;
+    margin: 20px 0;
+}
+
+/* Insta Page */
+.insta-page{
+    background-image: url(https://img.freepik.com/premium-photo/instagram-icon-screen-smartphone-mobile-3d-render_41204-14339.jpg);
+    /* background-color: rgb(118, 207, 207); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.insta-page form {
+    height: auto;
+    width: 70%;        
+    margin: 0px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 60px 20px;
+    background-color: rgba(32, 68, 69, 0.5);
+    border-radius: 12px;
+}
+.insta-page form input{
+    padding: 8px 14px;
+    width: 450px;
+    border: 3px solid lightgray;
+    outline: none;
+    font-size: 19px;
+    margin:8px 0;
+    border-radius: 6px;
 
 }
-img{
-
-    width: 500px;
-    height: 300px;
-    padding-left: 50px;
+#insta-head
+{
+    color: rgb(255, 255, 255);
+    border-radius: 12px;
+    background: linear-gradient(to right,  #ff6b08, #be25af);
+    /* -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text; */
 }

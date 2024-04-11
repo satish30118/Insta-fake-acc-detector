@@ -140,6 +140,7 @@ const SignUp = () => {
                                 type="text"
                                 id="form3Example1c"
                                 className="form-control"
+                                placeholder="Enter Name"
                               />
                               <label
                                 className="form-label"
@@ -223,6 +224,20 @@ const SignUp = () => {
                             >
                               Already have an Account?
                               <Link to="/sign-in">Login</Link>
+                            </label>
+                            <label
+                              className="form-check-label"
+                              for="form2Example3"
+                            >
+                              Predict Insta fake Account?
+                              <Link to="/predict/insta-fake-account">Insta</Link>
+                            </label>
+                            <label
+                              className="form-check-label"
+                              for="form2Example3"
+                            >
+                              Predict tweet sentiment?
+                              <Link to="/predict/tweet-status">Tweet</Link>
                             </label>
                           </div>
 

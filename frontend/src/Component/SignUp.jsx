@@ -48,7 +48,7 @@ const SignUp = () => {
       if (res.status === 201) {
         alert(res.data.message);
         //Forward to dashboard
-        navigate(`/predict-account`);
+        navigate(`/dashboard`);
         return;
       } else {
         alert(res.data.message);

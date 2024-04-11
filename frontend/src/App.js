@@ -14,7 +14,7 @@ function App() {
         <Route exact path="/" Component={Home} />
         <Route exact path="/sign-in" Component={SignIn} />
         <Route exact path="/sign-up" Component={SignUp} />
-        <Route exact path="/predict" Component={PredictAccount} />
+        <Route exact path="/dashboard" Component={PredictAccount} />
         <Route exact path="/predict/tweet-status" Component={TweetStatus} />
         <Route exact path="/predict/insta-fake-account" Component={InstaAccountChk} />
       </Routes>

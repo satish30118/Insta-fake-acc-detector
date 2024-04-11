@@ -1,10 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    if (!email || !password) {
+      alert("Fill all data!!");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API}/api/v1/auth/login`,
+        { email, password }
+      );
+
+      if (res?.data?.success) {
+        alert(res.data.message);
+        //Forward to dashboard
+        navigate(`/predict`);
+        return;
+      } else {
+        alert(res.data.message);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+      alert("Something went wrong, please try again");
+    }
+  };
   return (
     <div className="signin-form">
-      <section className="vh-100" style={{ backgroundColor: "rgb(118, 207, 207)" }}>
+      <section
+        className="vh-100"
+        style={{ backgroundColor: "rgb(118, 207, 207)" }}
+      >
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-lg-12 col-xl-11">
@@ -17,8 +53,6 @@ const SignIn = () => {
                       </p>
 
                       <form className="mx-1 mx-md-4">
-                       
-
                         <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div
@@ -27,12 +61,10 @@ const SignIn = () => {
                           >
                             <input
                               type="email"
-                              id="form3Example3c"
-                              className="form-control"
+                              placeholder="Enter email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
                             />
-                            <label className="form-label" for="form3Example3c">
-                              Your Email
-                            </label>
                           </div>
                         </div>
 
@@ -44,28 +76,19 @@ const SignIn = () => {
                           >
                             <input
                               type="password"
-                              id="form3Example4c"
-                              className="form-control"
+                              placeholder="Enter password"
+                              onChange={(e) => setPassword(e.target.value)}
+                              value={password}
                             />
-                            <label className="form-label" for="form3Example4c">
-                              Password
-                            </label>
                           </div>
                         </div>
 
-
                         <div className="form-check d-flex justify-content-center mb-5">
-                          <input
-                            className="form-check-input me-2"
-                            type="checkbox"
-                            value=""
-                            id="form2Example3c"
-                          />
                           <label
                             className="form-check-label"
                             for="form2Example3"
                           >
-                            Not have an account? 
+                            Not have an account?
                             <Link to="/sign-up">Register</Link>
                           </label>
                         </div>
@@ -76,6 +99,7 @@ const SignIn = () => {
                             data-mdb-button-init
                             data-mdb-ripple-init
                             className="btn btn-primary btn-lg"
+                            onClick={handleLogin}
                           >
                             Login
                           </button>

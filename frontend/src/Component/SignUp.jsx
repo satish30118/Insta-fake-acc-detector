@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [animation, setAnimation] = useState(false)
+  const [animation, setAnimation] = useState(false);
   const [otp, setOtp] = useState();
   const [data, setData] = useState({
     name: "",
@@ -22,77 +24,75 @@ const SignUp = () => {
     setData({ ...data, [name]: value });
   };
 
-
   const sendData = async (e) => {
     e.preventDefault();
 
     const { name, email, password, cpassword } = data;
 
     if (!name || !email || !password || !cpassword) {
-      alert("Fill all data!!");
+      toast.warn("Fill all data!!");
       return;
     }
 
     if (password !== cpassword) {
-      alert("Password and Confirm password are not same");
+      toast.warn("Password and Confirm password are not same");
       return;
     }
 
     try {
-
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/auth/register`,
         { name, email, password }
       );
 
       if (res.status === 201) {
-        alert(res.data.message);
+        toast.success(res.data.message);
         //Forward to dashboard
         navigate(`/dashboard`);
         return;
       } else {
-        alert(res.data.message);
+        toast.error(res.data.message);
         return;
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong, please try again");
+      toast.error("Something went wrong, please try again");
     }
   };
 
   return (
     <>
       <div className="signin-page">
-
-        <form >
+        <form>
           <div className="signin-form">
-          <h1 className="signin-head">Sign Up</h1>
+            <h1 className="signin-head">Sign Up</h1>
             <div className="d-flex flex-row align-items-center mb-4">
               <i className="fas fa-user fa-lg me-3 fa-fw"></i>
-              <div
-                data-mdb-input-init
-                className="form-outline flex-fill mb-0"
-              >
-                <input type="text" placeholder="Enter Name" name="name" onChange={handleData} />
+              <div data-mdb-input-init className="form-outline flex-fill mb-0">
+                <input
+                  type="text"
+                  placeholder="Enter Name"
+                  name="name"
+                  onChange={handleData}
+                />
               </div>
             </div>
 
             <div className="d-flex flex-row align-items-center mb-4">
               <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-              <div
-                data-mdb-input-init
-                className="form-outline flex-fill mb-0"
-              >
-                <input type="email" placeholder="Enter email" name="email" onChange={handleData} />
+              <div data-mdb-input-init className="form-outline flex-fill mb-0">
+                <input
+                  type="email"
+                  placeholder="Enter email"
+                  name="email"
+                  onChange={handleData}
+                />
               </div>
             </div>
 
             <div className="d-flex flex-row align-items-center mb-4">
               <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-              <div
-                data-mdb-input-init
-                className="form-outline flex-fill mb-0"
-              >
+              <div data-mdb-input-init className="form-outline flex-fill mb-0">
                 <input
                   type="password"
                   placeholder="Enter Password"
@@ -104,10 +104,7 @@ const SignUp = () => {
 
             <div className="d-flex flex-row align-items-center mb-4">
               <i className="fas fa-key fa-lg me-3 fa-fw"></i>
-              <div
-                data-mdb-input-init
-                className="form-outline flex-fill mb-0"
-              >
+              <div data-mdb-input-init className="form-outline flex-fill mb-0">
                 <input
                   type="password"
                   placeholder="Re-enter Password"
@@ -118,21 +115,13 @@ const SignUp = () => {
             </div>
 
             <div className="form-check d-flex justify-content-center mb-5">
-
-              <label
-                className="form-check-label"
-                for="form2Example3"
-              >
+              <label className="form-check-label" for="form2Example3">
                 Already have an Account?
                 <Link to="/sign-in">Login</Link>
               </label>
             </div>
-            <div >
-              <button
-                type="button"
-                className="m-btn"
-                onClick={sendData}
-              >
+            <div>
+              <button type="button" className="m-btn" onClick={sendData}>
                 Register
               </button>
             </div>
@@ -148,6 +137,14 @@ const SignUp = () => {
           </div>
         </form>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        closeOnClick
+        rtl={false}
+        draggable
+        theme="colored"
+      />
     </>
   );
 };

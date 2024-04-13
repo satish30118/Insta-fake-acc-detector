@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +13,7 @@ const SignIn = () => {
     e.preventDefault();
 
     if (!email || !password) {
-      alert("Fill all data!!");
+      toast.warn("Fill all data!!");
       return;
     }
 
@@ -22,32 +24,28 @@ const SignIn = () => {
       );
 
       if (res?.data?.success) {
-        alert(res.data.message);
+        toast.success(res.data.message);
         //Forward to dashboard
         navigate(`/dashboard`);
         return;
       } else {
-        alert(res.data.message);
+        toast.error(res.data.message);
         return;
       }
     } catch (err) {
       console.log(err);
-      alert("Something went wrong, please try again");
+      toast.error("Something went wrong, please try again");
     }
   };
   return (
     <div className="signin-page">
-      <form >
+      <form>
         <div className="signin-form">
-         
-            <h1 className="signin-head">Sign In</h1>
-          
+          <h1 className="signin-head">Sign In</h1>
+
           <div className="d-flex flex-row align-items-center mb-4">
             <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
-            <div
-              data-mdb-input-init
-              className="form-outline flex-fill mb-0"
-            >
+            <div data-mdb-input-init className="form-outline flex-fill mb-0">
               <input
                 type="email"
                 placeholder="Enter email"
@@ -59,10 +57,7 @@ const SignIn = () => {
 
           <div className="d-flex flex-row align-items-center mb-4">
             <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
-            <div
-              data-mdb-input-init
-              className="form-outline flex-fill mb-0"
-            >
+            <div data-mdb-input-init className="form-outline flex-fill mb-0">
               <input
                 type="password"
                 placeholder="Enter password"
@@ -73,20 +68,13 @@ const SignIn = () => {
           </div>
 
           <div className="form-check d-flex justify-content-center mb-5">
-            <label
-              className="form-check-label"
-              for="form2Example3"
-            >
+            <label className="form-check-label" for="form2Example3">
               Not have an account?
               <Link to="/sign-up">Register</Link>
             </label>
           </div>
           <div>
-            <button
-              type="button"
-              className="m-btn"
-              onClick={handleLogin}
-            >
+            <button type="button" className="m-btn" onClick={handleLogin}>
               Login
             </button>
           </div>
@@ -96,15 +84,19 @@ const SignIn = () => {
             src={
               "https://img.freepik.com/premium-vector/young-man-cartoon_18591-44529.jpg?size=626&ext=jpg"
             }
-
             alt="Sample image"
           />
-
-          
         </div>
       </form>
 
-
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        closeOnClick
+        rtl={false}
+        draggable
+        theme="colored"
+      />
     </div>
   );
 };

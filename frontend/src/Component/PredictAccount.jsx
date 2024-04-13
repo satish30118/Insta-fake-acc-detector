@@ -9,11 +9,14 @@ const PredictAccount = () => {
         <Link to={"/predict/insta-fake-account"}>
             <img src="https://www.webdew.com/wp-content/uploads/2023/01/Check-for-fake-followers.svg" alt="" />
           </Link>
+          <div className="acc-text">Check Fake Account</div>
         </div>
+        
         <div className="twitter">
           <Link to={"/predict/tweet-status"}>
-            <img src="https://monkeylearn.com/static/6700dcab9bcc691104dd0d794f6e7ef4/Sentiment-analysis-of-Twitter-Social.png" alt="" />
+            <img src="https://miro.medium.com/v2/resize:fit:1024/1*cNLqgreCvK9hdaTsV6BJMg.png" alt="" />
           </Link>
+          <div className="acc-text">Check Sentiment</div>
         </div>
       </div>
     </>

@@ -39,15 +39,20 @@
 /* Tweet Page */
 .tweet-status {
     /* background-color: aqua; */
-    background-image: url(https://media.licdn.com/dms/image/D4D12AQEZ1zKwf1drNA/article-cover_image-shrink_720_1280/0/1693388207691?e=2147483647&v=beta&t=A9PHzzuyW2Pv2tozWYIy7jajzDOU8e749JNDxuhJF_c);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     min-height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
+    position: relative;
+}
 
+.tweet-status img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2000;
 }
 
 .tweet-status form {
@@ -56,9 +61,17 @@
     margin: 0px auto;
     text-align: center;
     padding: 60px 20px;
+    margin: 0;
     /* background-color: rgba(0,0,0,0.5); */
 }
-
+.tweet-status .overlay{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: -1000;
+    background-color: rgba(0,0,0,0.4);
+}
 .tweet-status textarea {
     width: 90%;
     height: 300px;
@@ -68,6 +81,12 @@
     font-size: 30px;
     border: none;
     outline: none;
+    border-radius: 10px;
+    font-weight: 660;
+}
+
+.tweet-status ::placeholder {
+    color: rgb(212, 208, 208);
 }
 
 .btn {
@@ -116,6 +135,7 @@
 
 .insta-page form input {
     padding: 8px 14px;
+    /* width: 100%; */
     width: 450px;
     border: 3px solid lightgray;
     outline: none;
@@ -131,6 +151,8 @@
     background: linear-gradient(to right, #ff6b08, #be25af);
     /* -webkit-text-fill-color: transparent;
     -webkit-background-clip: text; */
+    padding: 10px 30px;
+    margin-bottom: 30px;
 }
 
 .insta-page .result {
@@ -195,4 +217,37 @@
 .signin-head {
     padding: 20px;
     margin: 0 24%;
+}
+
+.acc-text {
+    font-size: 32px;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+}
+
+#tweet-result {
+    background: linear-gradient(to right, rgb(12, 94, 121), rgb(189, 33, 161));
+    margin: 0;
+    /* border: 5px rgb(10, 38, 217) solid; */
+    visibility: hidden;
+    /* animation: ani 2s;
+    animation-iteration-count: 200; */
+    /* transition: all 2s 200; */
+}
+
+@keyframes ani {
+
+    25% {
+        border: 5px solid blue;
+    }
+
+    50% {
+        border: 5px solid green;
+    }
+
+    75% {
+        border: 5px solid gold;
+    }
+
 }

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Spinner from "../Animation/Spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const bg =
   "https://img.freepik.com/premium-photo/instagram-icon-screen-smartphone-mobile-3d-render_41204-14339.jpg";
 
@@ -34,10 +36,11 @@ const InstaAccountChk = () => {
         !cs ||
         !pi
       ) {
-        alert("Fill data!");
+        toast.warn("Fill data!");
         return;
       }
       setAnimation(true);
+      setResponse("");
       const res = await axios.post(
         `${process.env.REACT_APP_API}/api/v1/predict/predict-insta-account`,
         { pos, flw, flg, pic, lin, erl, erc, pr, fo, cs, pi }
@@ -46,14 +49,16 @@ const InstaAccountChk = () => {
 
       if (res?.status == 200) {
         // alert(res.data.prediction);
-        setResponse(res?.data?.prediction);
+        setResponse(JSON.stringify(res?.data?.prediction));
+        // console.log(JSON.stringify(res?.data?.prediction));
+        // console.log(respose[2])
       } else {
         alert(res);
       }
     } catch (error) {
       console.log(error);
       setAnimation(false);
-      alert("Something went wrong, please try again");
+      toast.error("Something went wrong, please try again");
     }
   };
   return (
@@ -157,19 +162,33 @@ const InstaAccountChk = () => {
           </div>
           <div style={{ textAlign: "center" }}>
             <button className="btn" onClick={chkAccount}>
-              {animation ? <Spinner /> : "Check Sentiment"}
+              {animation ? <Spinner /> : "Check"}
             </button>
           </div>
           <div className="result">
-            
-            {respose ? respose == 1 ? (
-              <img src="https://static.vecteezy.com/system/resources/previews/019/582/462/non_2x/hand-holding-magnifying-glass-with-fake-inscription-free-png.png" />
+            {respose ? (
+              respose[2] == 1 ? (
+                <img
+                  style={{ borderRadius: "300%" }}
+                  src="https://en.pimg.jp/055/025/346/1/55025346.jpg"
+                />
+              ) : (
+                <img src="https://cdn-icons-png.flaticon.com/512/5229/5229573.png" />
+              )
             ) : (
-              <img src="https://cdn-icons-png.flaticon.com/512/5229/5229573.png" />
-            ) : ""}
+              ""
+            )}
           </div>
         </form>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        closeOnClick
+        rtl={false}
+        draggable
+        theme="colored"
+      />
     </>
   );
 };

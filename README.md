@@ -69,6 +69,8 @@ The Instagram Fake Account Detector is a web application designed to identify an
 - Pickle
 - tfidfVectorizer
 - knn
+- LLMs-BERT
+- GenAI embeddings
 
 
 ## Database
